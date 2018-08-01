@@ -1,7 +1,7 @@
 {
   "name": "@honkjs/injector",
   "version": "1.0.0",
-  "description": "Honk, because, by default, that is all that it does.",
+  "description": "Thunk/Injector middleware for honk.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

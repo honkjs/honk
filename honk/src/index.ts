@@ -8,6 +8,7 @@ export interface IHonkServices {
 
 export interface IHonkApp {
   services: any;
+  [key: string]: any;
 }
 
 export interface IHonkMiddleware {
