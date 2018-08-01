@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "sourceMap": true,
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": true
+  },
+  "exclude": ["node_modules", "dist"]
+}

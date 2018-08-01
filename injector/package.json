@@ -1,0 +1,27 @@
+{
+  "name": "@honkjs/injector",
+  "version": "1.0.0",
+  "description": "Honk, because, by default, that is all that it does.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/honkjs/honk.git"
+  },
+  "author": "Kellen Piffner",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/honkjs/honk/issues"
+  },
+  "homepage": "https://github.com/honkjs/honk#readme",
+  "dependencies": {
+    "@honkjs/honk": "*"
+  },
+  "devDependencies": {
+    "typescript": "^3.0.1"
+  }
+}
