@@ -1,7 +1,7 @@
 {
-  "name": "@honkjs/components",
+  "name": "@honkjs/store",
   "version": "1.0.0",
-  "description": "Nanocomponent middleware for honk.",
+  "description": "A simple state store for honk.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -12,14 +12,14 @@
     "type": "git",
     "url": "git+https://github.com/honkjs/honk.git"
   },
+  "author": "Kellen Piffner",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/honkjs/honk/issues"
   },
   "homepage": "https://github.com/honkjs/honk#readme",
   "dependencies": {
-    "@honkjs/honk": "*",
-    "nanocomponent": "^6.5.2"
+    "@honkjs/honk": "*"
   },
   "devDependencies": {
     "typescript": "^3.0.1"
