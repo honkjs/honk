@@ -3,5 +3,5 @@
   "compilerOptions": {
     "outDir": "./dist"
   },
-  "files": ["src/index.ts", "src/nanocomponent.d.ts", "src/util.ts"]
+  "files": ["src/index.ts"]
 }

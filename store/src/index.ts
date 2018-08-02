@@ -1,16 +1,3 @@
-import { IHonkMiddlewareCreator } from '@honkjs/honk';
-
-export default function createStoreMiddleware<S>(state: S): IHonkMiddlewareCreator {
-  const store = createStore(state);
-  return (app, next) => {
-    app.services = {
-      store,
-      ...app.services,
-    };
-    return next;
-  };
-}
-
 export interface ISubscribe<S> {
   (state: S): void;
 }
