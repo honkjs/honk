@@ -31,7 +31,7 @@ const honk = new Honk().honk;
 honk(); // output: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](honk/README.md)
+[Would you like to know more?](honk/)
 
 # With service injection
 
@@ -39,7 +39,7 @@ honk(); // output: "HONK 🚚 HONK"
 import Honk from '@honkjs/honk';
 import injector from '@honkjs/injector';
 
-const honk = new Honk().use(injector).honk;
+const honk = new Honk().use(injector()).honk;
 
 honk(); // output: "HONK 🚚 HONK"
 
@@ -58,16 +58,16 @@ function honkTwo(butWhyTho: string) {
 console.log(honk(honkTwo('honk'))); // output after 100ms: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](injector/README.md)
+[Would you like to know more?](injector/)
 
 # With components
 
 ```ts
 import Honk from '@honkjs/honk';
-import component from '@honkjs/components';
+import components from '@honkjs/components';
 import html from 'nanohtml';
 
-const honk = new Honk().use(component).honk;
+const honk = new Honk().use(components()).honk;
 
 honk(); // output: "HONK 🚚 HONK"
 
@@ -75,6 +75,7 @@ type HonkButtonProps = { honker :IHonk }
 
 class HonkButton : Component<HonkButtonProps> {
   constructor(private id, private honk) {
+    super(id);
     honk();
   }
 
@@ -99,7 +100,7 @@ const honker = html`<div>Honk: ${button}</div>`;
 //  *CLICK*  output: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](components/README.md)
+[Would you like to know more?](components/)
 
 # With store
 
@@ -148,7 +149,7 @@ function honkABunch({ store, honk }: MyHonkAppServices) {
 honk(honkABunch); // output: "HONK 🚚 HONK", "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](store/README.md)
+[Would you like to know more?](store/)
 
 # With custom services
 
@@ -227,7 +228,7 @@ const honk = new Honk().use(silence()).honk;
 honk(); // output: Nothing. Just the silence of your cold, dead heart.
 ```
 
-[Would you like to know more?](silence/README.md)
+[Would you like to know more?](silence/)
 
 # FAQ
 

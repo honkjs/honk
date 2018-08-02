@@ -1,8 +1,10 @@
 node_modules/
-build/
 coverage/
-*.log
-.nyc_output/
 dist/
-.cache/
+tmp/
+npm-debug.log*
+package-lock.json
+yarn.lock
+.DS_Store
+.idea
 .vscode

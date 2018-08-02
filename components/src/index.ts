@@ -1,40 +1,36 @@
-import NanoComponent from 'nanocomponent';
-import { IHonk, IHonkMiddlewareCreator } from '@honkjs/honk';
-import { shallowEqual } from './util';
+import { IHonkMiddlewareCreator } from '@honkjs/honk';
 
 declare module '@honkjs/honk' {
   interface IHonk {
-    <P, C extends Component<P>>(creator: IComponentCreator<P, C>, id: string, props?: P): HTMLElement;
+    <P>(creator: IHonkComponentCreator<P>, props?: P): HTMLElement;
   }
 }
 
 export interface IComponentCache {
-  get: (id: string) => NanoComponent;
-  set: (id: string, component: NanoComponent) => void;
+  get: (id: string) => IComponent;
+  set: (id: string, component: IComponent) => void;
   remove: (id: string) => void;
 }
 
-export interface IComponentCreator<P, C extends Component<P>> {
-  (services: any, id: string): C;
+export interface IComponent {
+  unload?: (el: HTMLElement) => void;
+  render: (args: any) => HTMLElement;
 }
 
-export abstract class Component<P> extends NanoComponent {
-  prev!: P;
+export interface IComponentCreator<P> {
+  (services: any, id: string, props: P): IComponent;
+}
 
-  createElement(honk: IHonk, props: P): HTMLElement {
-    this.prev = props;
-    return this.create(honk, props);
-  }
+export interface IMapComponentPropsToId<P> {
+  (props: P): string;
+}
 
-  abstract create(honk: IHonk, props: P): HTMLElement;
-
-  update(props: P) {
-    return !shallowEqual(this.prev, props);
-  }
+export interface IHonkComponentCreator<P> {
+  (cache: IComponentCache, services: any, props: P): HTMLElement;
+  component: string;
 }
 
 export function createCache(): IComponentCache {
-  // stupid simple default cache lookup
   const cache: any = {};
 
   function get(id: string) {
@@ -55,27 +51,67 @@ export function createCache(): IComponentCache {
   };
 }
 
-export default function createMiddleware(cache: IComponentCache = createCache()): IHonkMiddlewareCreator {
-  return (app, next) => {
-    function createComponent<P, C extends Component<P>>(creator: IComponentCreator<P, C>, id: string, props?: P) {
-      // retrieve or add the component
-      let comp = cache.get(id);
-      if (!comp) {
-        comp = creator(app.services, id);
-        cache.set(id, comp);
-      }
+// can pull the id from props
+export function createHonkComponent<P extends { id: string }>(
+  name: string,
+  creator: IComponentCreator<P>
+): IHonkComponentCreator<P>;
 
-      if (!comp.unload) {
-        // if not overriden, will unload automatically
-        comp.unload = () => cache.remove(id);
-      }
+// has to pull from the creator function
+export function createHonkComponent<P>(
+  name: string,
+  creator: IComponentCreator<P>,
+  mapPropsToId: IMapComponentPropsToId<P>
+): IHonkComponentCreator<P>;
 
-      return comp.render(app.services.honk, props);
+export function createHonkComponent<P>(
+  name: string,
+  creator: IComponentCreator<P>,
+  mapPropsToId: IMapComponentPropsToId<P> = getDefaultId
+): IHonkComponentCreator<P> {
+  const honkCompCreator = <IHonkComponentCreator<P>>function(cache: IComponentCache, services: any, props: P) {
+    const id = mapPropsToId(props);
+
+    if (!id) {
+      throw new Error('An ID must be specified to create component ' + name);
     }
 
+    // id's are "name:id", so components don't have to be globally unique
+    const uid = name + ':' + id;
+
+    let comp = cache.get(uid);
+    if (!comp) {
+      comp = creator(services, uid, props);
+
+      // override unload behavior to remove from cache
+      // but still call any other behaviors as appropriate
+      let unload = comp.unload;
+      comp.unload = (el) => {
+        unload && unload.apply(comp, el);
+        cache.remove(uid);
+      };
+      cache.set(uid, comp);
+    }
+    return comp.render(props);
+  };
+
+  // add a property flag to the creator function
+  // this allows it to be more accurately id'd by the middleare
+  honkCompCreator.component = name;
+
+  return honkCompCreator;
+}
+
+function getDefaultId(props: any) {
+  return props.id;
+}
+
+export default function createMiddleware(cache: IComponentCache = createCache()): IHonkMiddlewareCreator {
+  return (app, next) => {
     return (args) => {
-      if ((args.length === 3 || args.length === 2) && typeof args[0] === 'function' && typeof args[1] === 'string') {
-        return createComponent(args[0], args[1], args[2]);
+      if (args.length === 2 && typeof args[0] === 'function' && args[0].component && typeof args[1] === 'object') {
+        const creator: IHonkComponentCreator<any> = args[0];
+        return creator(cache, app.services, args[1]);
       }
       return next(args);
     };

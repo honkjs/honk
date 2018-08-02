@@ -1,7 +1,7 @@
 {
   "name": "@honkjs/components",
   "version": "1.0.0",
-  "description": "Nanocomponent middleware for honk.",
+  "description": "Component middleware for honk.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -18,8 +18,7 @@
   },
   "homepage": "https://github.com/honkjs/honk#readme",
   "dependencies": {
-    "@honkjs/honk": "*",
-    "nanocomponent": "^6.5.2"
+    "@honkjs/honk": "*"
   },
   "devDependencies": {
     "typescript": "^3.0.1"
