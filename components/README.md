@@ -1,47 +1,88 @@
 # honkjs/components
 
-A wrapper for choo [nanocomponents](https://github.com/choojs/nanocomponent).
+A honk middleware for creating and caching choo [nanocomponents](https://github.com/choojs/nanocomponent).
 
 This is probably the most opinionated of the basic honk middlewares.
 
 # Basics
 
+First, the component:
+
+```ts
+import { IHonkServices } from '@honkjs/honk';
+import { createHonkComponent } from '@honkjs/components';
+import html from 'choo/html';
+import Component from 'choo/component';
+
+type HelloComponentProps = { id: string; name: string };
+
+class HelloComponent extends Component {
+  private prev?: string;
+
+  createElement({ name }: HelloComponentProps) {
+    this.prev = name;
+    return html`<div>Hello, ${name}</div>`;
+  }
+
+  update({ name }: HelloComponentProps) {
+    return this.prev !== name;
+  }
+}
+
+const create = createHonkComponent('Hello', (services: IHonkServices, id: string, props: HelloComponentProps) => {
+  return new HelloComponent();
+});
+
+export default create;
+```
+
+And how we use it:
+
 ```ts
 import Honk from '@honkjs/honk';
 import components from '@honkjs/components';
-import html from 'nanohtml';
+import hello from './HelloComponent';
 
 const honk = new Honk().use(components()).honk;
 
-type HonkButtonProps = { name: string, onClick: () => void }
-
-// Unlike nanocomponent, honk components have a single property type
-class HonkButton : Component<HonkButtonProps> {
-  constructor(private id) {
-    super(id);
-  }
-
-create(honk, { name, onClick }: HonkButtonProps) {
-    // honk is passed as the first argument to the create function
-    // this makes it easy to create sub components
-    return html`<button onclick=${onClick}>${name}</button>`;
-  }
-}
-
-// To use honk to create a component, you need a creator function.
-// The function takes honk services as the first parameter, id as the second,
-// and returns the new component
-function createHonkButton({ honk }: IHonkServices, id: string) {
-  return new HonkButton(id);
-}
-
-// The third argument type will be inferred by typescript to be HonkButtonProps
-// If you try to put in invalid properties for the component creator function, it will throw an error
-const honker = html`<div>Click this: ${honk(createHonkButton, 'HONK', { onClick: honk })}</div>`;
-//  *CLICK*  output: "HONK 🚚 HONK"
+honk(create, { id: 'yo', name: 'bob' });
+// returns:  html`<div>Hello, bob</div>`
 ```
 
-Id must be unique throughout the application.
+The component itself is defined like normal. Honk only requires all the props to be passed as a single object.
+
+To make a component instantiable via honk, it has to be wrapped by `createHonkComponent`. This creates a function that can be called to create or uncache the component as appropriate.
+
+```ts
+/**
+ * The first argument is the name of the component.
+ * This is prefixed to the id when when working to the cache.
+ *
+ * The second argument is the function to create a new instance of the component.
+ * It's passed the honk services, the id (with prefix), and the initializing props.
+ */
+const create = createHonkComponent('Hello', (services: IHonkServices, id: string, props: HelloComponentProps) => {
+  return new HelloComponent();
+});
+```
+
+## ID from props
+
+By default, the props must contain an "id" field used to locate the component. Alternatively, you can define a function to map the id from the passed property object.
+
+For example:
+
+```ts
+function getIdFromProps(item: Item) {
+  return item.id;
+}
+
+function createComponent(services: IHonkServices, id: string, props: Item) {
+  return new ItemComponent();
+}
+
+const create = createHonkComponent('ItemView', createComponent, getIdFromProps);
+```
 
 # Using with choo
 
