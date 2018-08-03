@@ -88,7 +88,7 @@ Typescript will merge any of these together when type checking your use of honk(
 
 # Recipe examples
 
-Here are some basic examples of middlewares you can add to honk.
+Here are some examples of middlewares you can add to honk.
 
 ## Exception catcher
 
@@ -131,6 +131,59 @@ const honk = new Honk()
   }).honk;
 
 honk(doSomething);
+```
+
+## Reducer
+
+Let's build [redux](https://redux.js.org/) with the help of [@honkjs/store](../store).
+
+```ts
+import Honk from '@honkjs/honk';
+import { createStore } from '@honkjs/store';
+
+const store = createStore({ count: 0 });
+
+const unsubscribe = store.subscribe((state) => {
+  console.log('state', state);
+});
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {
+        ...state,
+        count: state.count + action.data,
+      };
+    case 'decrement':
+      return {
+        ...state,
+        count: state.count - action.data,
+      };
+    default:
+      return state;
+  }
+}
+
+function reducerMiddleware(store, reducer) {
+  return (app, next) => (args) => {
+    // has one object argument with a type property
+    if (args.length === 1 && typeof args[0] === 'object' && args[0].type) {
+      const curState = store.getState();
+      const newState = reducer(curState, args[0]);
+      store.setState(newState);
+    } else {
+      return next(args);
+    }
+  };
+}
+
+const honk = new Honk().use(reducerMiddleware(store, reducer)).honk;
+
+honk.honk({ type: 'increment', data: 7 });
+// output: state, { count: 7 }
+
+honk.honk({ type: 'decrement', data: 5 });
+// output: state, { count: 2 }
 ```
 
 ## Injector
@@ -182,10 +235,4 @@ function dispatchMeWithParam(name) {
 honk(dispatchMeWithParam('bob')).then((results) => console.log(results));
 ```
 
-This functionality is available pre-built as [@honkjs/injector](https://github.com/honkjs/honk/tree/master/injector).
-
-## Reducer
-
-Let's build redux.
-
-[still in transit 🚚]
+This functionality is available pre-built as [@honkjs/injector](../injector).
