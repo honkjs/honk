@@ -1,5 +1,20 @@
 <h1 align="center">Honk</h1>
 
+<div align="center">
+  <!-- stability -->
+  <a href="https://nodejs.org/api/documentation.html#documentation_stability_index">
+    <img src="https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square" alt="API Stability" />
+  </a>
+  <!-- coverage -->
+  <a href="https://codecov.io/github/honkjs/honk">
+    <img src="https://img.shields.io/codecov/c/github/honkjs/honk/master.svg?style=flat-square" alt="Test Coverage" />
+  </a>
+  <!-- build -->
+  <a href="https://travis-ci.org/honkjs/honk">
+    <img src="https://img.shields.io/travis/choojs/choo/master.svg?style=flat-square" alt="Build Status" />
+  </a>
+</div>
+
 Honk, pronounced "HONK 🚚 HONK" shouted as loudly as possible while making a truck horn pulling motion, is inspired by, and a loud collection of addons for, [choo](https://github.com/choojs/choo) 🚂🚋, the sturdy frontend framework that could.
 
 Honk, because, by default, that is all that it does.
@@ -16,6 +31,81 @@ Honk, because, by default, that is all that it does.
 </div>
 
 ---
+
+# Packages
+
+<table>
+  <tr>
+    <td>Package</td>
+    <td>Version</td>
+    <td>Dependency Status</td>
+  </tr>
+  <tr>
+    <td>@honkjs/honk</td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/honk">
+        <img src="https://img.shields.io/npm/v/@honkjs/honk.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/honk">
+        <img src="https://david-dm.org/honkjs/honk.svg?style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>@honkjs/components</td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/components">
+        <img src="https://img.shields.io/npm/v/@honkjs/components.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/components">
+        <img src="https://david-dm.org/honkjs/components.svg?style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>@honkjs/injector</td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/injector">
+        <img src="https://img.shields.io/npm/v/@honkjs/injector.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/injector">
+        <img src="https://david-dm.org/honkjs/injector.svg?style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>@honkjs/store</td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/store">
+        <img src="https://img.shields.io/npm/v/@honkjs/store.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/store">
+        <img src="https://david-dm.org/honkjs/store.svg?style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>@honkjs/silence</td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/silence">
+        <img src="https://img.shields.io/npm/v/@honkjs/silence.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/silence">
+        <img src="https://david-dm.org/honkjs/silence.svg?style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+  </tr>
+</table>
 
 # Getting started
 

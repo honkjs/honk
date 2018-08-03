@@ -8,13 +8,11 @@ env:
   - PROJECT=silence
 before_install:
   - cd $PROJECT
-  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+install:
+  - npm ci
+  - npm install -g codecov
 script:
   - npm run test
   - npm run build
-deploy:
-  provider: npm
-  api_key: $NPM_TOKEN
-  on:
-    tags: true
+  - codecov
 
