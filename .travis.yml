@@ -2,4 +2,4 @@ language: node_js
 env:
   - PROJECT=honk
   - PROJECT=silence
-script: .scripts/travis.build.sh
+script: build.sh
