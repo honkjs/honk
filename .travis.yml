@@ -12,3 +12,9 @@ before_install:
 script:
   - npm run test
   - npm run build
+deploy:
+  provider: npm
+  api_key: $NPM_TOKEN
+  on:
+    tags: true
+
