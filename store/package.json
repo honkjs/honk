@@ -4,6 +4,11 @@
   "description": "A simple state store for honk.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "tests"
+  ],
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -25,5 +30,9 @@
     "jest": "^23.4.2",
     "ts-jest": "^23.1.2",
     "typescript": "^3.0.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
   }
 }
