@@ -43,19 +43,13 @@ const honk = new Honk().use(injector()).honk;
 
 honk(); // output: "HONK 🚚 HONK"
 
-function honkOne({ honk }: IHonkServices) {
-  setTimeout(() => honk(), 100);
-}
-
-console.log(honk(honkOne)); // output after 100ms: "HONK 🚚 HONK"
-
-function honkTwo(butWhyTho: string) {
+function delayedHonk(delay: number) {
   return function({ honk }: IHonkServices) {
-    setTimeout(() => honk(), 100);
+    setTimeout(() => honk(), delay);
   };
 }
 
-console.log(honk(honkTwo('honk'))); // output after 100ms: "HONK 🚚 HONK"
+honk(delayedHonk(1000)); // output after 1000ms: "HONK 🚚 HONK"
 ```
 
 [Would you like to know more?](injector/)
@@ -63,40 +57,41 @@ console.log(honk(honkTwo('honk'))); // output after 100ms: "HONK 🚚 HONK"
 # With components
 
 ```ts
-import Honk from '@honkjs/honk';
+import Honk, { IHonk, IHonkServices } from '@honkjs/honk';
 import components from '@honkjs/components';
 import html from 'nanohtml';
+import Component from 'nanocomponent';
 
 const honk = new Honk().use(components()).honk;
 
 honk(); // output: "HONK 🚚 HONK"
 
-type HonkButtonProps = { honker :IHonk }
+type HonkProps = { id: string; onHonk: () => void };
 
-class HonkButton : Component<HonkButtonProps> {
-  constructor(private id, private honk) {
+class HonkButton extends Component {
+  private props: HonkProps;
+
+  constructor(private honk: IHonk, id: string) {
     super(id);
-    honk();
   }
 
-  honk = () => this.honk();
+  createElement(props: HonkProps) {
+    this.props = props;
+    return html`<button onclick=${this.onclick}>Honk</honk>`;
+  }
 
-  create(honk, { honker }: HonkButtonProps) {
-    honk();
-    honker();
-    return html`<button onclick=this.honk>${this.id}</button>`;
+  onclick = () => this.props.onHonk();
+
+  update() {
+    return false;
   }
 }
 
-function createHonkButton({ honk }, id) {
-  honk();
-  return new HonkButton(id, honk);
-}
+const button = createHonkComponent('HonkButton', ({ honk }: IHonkServices, id: string) => {
+  return new HonkButton(honk, id);
+});
 
-const button = honk(createHonkButton, 'honk', { honker: honk });
-// output: "HONK 🚚 HONK", "HONK 🚚 HONK", "HONK 🚚 HONK"
-
-const honker = html`<div>Honk: ${button}</div>`;
+const honker = html`<div>Honk: ${honk(button, { id: 'honk', onHonk: () => honk() })}</div>`;
 //  *CLICK*  output: "HONK 🚚 HONK"
 ```
 
@@ -106,47 +101,34 @@ const honker = html`<div>Honk: ${button}</div>`;
 
 ```ts
 import Honk from '@honkjs/honk';
-import injector from '@honkjs/injector';
-import store from '@honkjs/store';
+import { createStore } from '@honkjs/store';
 
-const initHonkState = {
+const honk = new Honk().honk;
+
+honk(); // output: "HONK 🚚 HONK"
+
+const initState = {
   honks: 0,
 };
 
-const honk = new Honk().use(store(initHonkState)).use(injector).honk;
+const store = createStore(initState);
 
-function honkAgain({ store, honk }: MyHonkAppServices) {
-  honk();
-  store.setState((state) => ({
-    ...state,
-    honks: state.honks + 1,
-  }));
-}
-
-function subscribeNowToHonks({ store, honk }: MyHonkAppServices) {
-  const unsubscribe = store.subscribe((state) => {
-    if (state.honks >= 2) {
-      unsubscribe();
-    } else {
-      honk();
-    }
-  });
-}
-
-honk(subscribeNowToHonks);
-
-honk(honkAgain); // output: "HONK 🚚 HONK", "HONK 🚚 HONK"
-
-honk(honkAgain); // output: "HONK 🚚 HONK"
-
-function honkABunch({ store, honk }: MyHonkAppServices) {
-  const honks = store.getState().honks;
-  for (let x = 0; x < honks; x++) {
+const unsubscribe = store.subscribe((state) => {
+  for (let x = 0; x < state.honks; x++) {
     honk();
   }
-}
+});
 
-honk(honkABunch); // output: "HONK 🚚 HONK", "HONK 🚚 HONK"
+store.setState((state) => ({ honks: 1 });
+// output: "HONK 🚚 HONK"
+
+store.setState((state) => ({ honks: 2 });
+// output: "HONK 🚚 HONK", "HONK 🚚 HONK"
+
+unsubscribe();
+
+store.setState((state) => ({ honks: 1000 });
+// output: nothing
 ```
 
 [Would you like to know more?](store/)
@@ -171,36 +153,21 @@ function honkOne({ anotherHonk }) {
 console.log(honk(honkOne)); // output after 100ms: "HONK 🚚 HONK"
 ```
 
+[Would you like to know more?](honk/)
+
 # With custom middleware
 
 ```ts
 import Honk from '@honkjs/honk';
 
-const honk = new Honk().use((app, next) => {
-  function honkReducer(honkAction: { type: string }) {
-    switch (honkAction.type) {
-      case 'honkOne':
-        app.services.honk();
-        break;
-      case 'honkTwo':
-        app.services.honk();
-        break;
-    }
-  }
-  return (args) => {
+const honk = new Honk().use((app, next) => (args) => {
     if (args.length === 1 && typeof args[0] === 'object' && args[0].type) {
-      return honkReducer(args[0]);
+
     } else {
       return next(args);
     }
   };
 }).honk;
-
-declare module '@honkjs/honk' {
-  export interface IHonk {
-    ({ type: string }): void;
-  }
-}
 
 honk(); // output: "HONK 🚚 HONK"
 
@@ -209,13 +176,7 @@ honk.honk({ type: 'honkOne' }); // output: "HONK 🚚 HONK"
 honk.honk({ type: 'honkTwo' }); // output: "HONK 🚚 HONK"
 ```
 
-# With routing
-
-[still in transit 🚚]
-
-# With DOM
-
-[still in transit 🚚]
+[Would you like to know more?](honk/)
 
 # With silence
 
@@ -232,6 +193,6 @@ honk(); // output: Nothing. Just the silence of your cold, dead heart.
 
 # FAQ
 
-## Honk?
+### Honk?
 
 HONK 🚚 HONK
