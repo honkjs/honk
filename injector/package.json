@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/honkjs/honk/issues"
   },
-  "homepage": "https://github.com/honkjs/honk#readme",
+  "homepage": "https://github.com/honkjs/honk",
   "dependencies": {
     "@honkjs/honk": "*"
   },

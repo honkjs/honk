@@ -1,7 +1,7 @@
 {
   "name": "@honkjs/store",
   "version": "1.0.0",
-  "description": "A simple state store for honk.",
+  "description": "A simple state store with subscriptions for honk.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/honkjs/honk/issues"
   },
-  "homepage": "https://github.com/honkjs/honk#readme",
+  "homepage": "https://github.com/honkjs/honk",
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^23.3.1",
