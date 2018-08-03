@@ -1,4 +1,11 @@
 language: node_js
-script:
-  - npm run --prefix honk/ test
-  - npm run --prefix honk/ build
+env:
+  - PROJECT=honk
+jobs:
+  include:
+    - stage: install
+      script: cd $PROJECT && npm ci
+    - stage: test
+      script: npm test
+    - stage: build
+      script: npm build
