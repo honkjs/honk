@@ -2,4 +2,7 @@ language: node_js
 env:
   - PROJECT=honk
   - PROJECT=silence
-script: build.sh
+before_install: cd $PROJECT
+script:
+  - npm run test
+  - npm run build
