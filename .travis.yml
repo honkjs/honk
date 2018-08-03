@@ -1,11 +1,5 @@
 language: node_js
 env:
   - PROJECT=honk
-jobs:
-  include:
-    - stage: install
-      script: cd $PROJECT && npm ci
-    - stage: test
-      script: npm test
-    - stage: build
-      script: npm build
+  - PROJECT=silence
+script: .scripts/travis.build.sh
