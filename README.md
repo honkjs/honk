@@ -139,10 +139,13 @@ store.setState((state) => ({ honks: 1000 });
 import Honk from '@honkjs/honk';
 import injector from '@honkjs/injector';
 
-const honk = new Honk().use(injector).use((app, next) => {
-  app.services.anotherHonk = app.services.honk;
-  return next;
-}).honk;
+function moreHonkMiddleware(app, next) {
+    app.services.anotherHonk = app.services.honk;
+    return next;
+  }
+}
+
+const honk = new Honk().use(injector).use(moreHonkMiddleware).honk;
 
 honk(); // output: "HONK 🚚 HONK"
 
@@ -150,7 +153,7 @@ function honkOne({ anotherHonk }) {
   setTimeout(() => anotherHonk(), 100);
 }
 
-console.log(honk(honkOne)); // output after 100ms: "HONK 🚚 HONK"
+honk(honkOne); // output after 100ms: "HONK 🚚 HONK"
 ```
 
 [Would you like to know more?](honk/)
@@ -160,20 +163,29 @@ console.log(honk(honkOne)); // output after 100ms: "HONK 🚚 HONK"
 ```ts
 import Honk from '@honkjs/honk';
 
-const honk = new Honk().use((app, next) => (args) => {
-    if (args.length === 1 && typeof args[0] === 'object' && args[0].type) {
-
-    } else {
-      return next(args);
+function honkingMiddleware(app, next) {
+  return function(args) {
+    if (args.length === 1 && args[0].type) {
+      const honkType = args[0].type;
+      if (honkType === 'quiet') {
+        return 'honk 🚚 honk';
+      } else {
+        return 'HONK 🚚 HONK';
+      }
     }
+    return next(args);
   };
-}).honk;
+}
+
+const honk = new Honk().use(honkingMiddleware).honk;
 
 honk(); // output: "HONK 🚚 HONK"
 
-honk.honk({ type: 'honkOne' }); // output: "HONK 🚚 HONK"
+const quiet = honk.honk({ type: 'quiet' }); // output: nothing.
+// quiet = "honk 🚚 honk"
 
-honk.honk({ type: 'honkTwo' }); // output: "HONK 🚚 HONK"
+const loud = honk.honk({ type: 'loud' }); // output: nothing.
+// loud = "HONK 🚚 HONK"
 ```
 
 [Would you like to know more?](honk/)
