@@ -36,9 +36,10 @@ Honk, because, by default, that is all that it does.
 
 <table>
   <tr>
-    <td>Package</td>
-    <td>Version</td>
-    <td>Dependency Status</td>
+    <th>Package</th>
+    <th>Version</th>
+    <th>Dependencies</th>
+    <th>Dev Dependencies</th>
   </tr>
   <tr>
     <td>@honkjs/honk</td>
@@ -49,7 +50,12 @@ Honk, because, by default, that is all that it does.
     </td>
     <td>
       <a href="https://david-dm.org/honkjs/honk">
-        <img src="https://david-dm.org/honkjs/honk.svg?style=flat-square" alt="Dependency Status" />
+        <img src="https://david-dm.org/honkjs/honk.svg?path=honk&style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/honk?path=silence&type=dev">
+        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=silence&style=flat-square" alt="Dependency Status" />
       </a>
     </td>
   </tr>
@@ -61,8 +67,13 @@ Honk, because, by default, that is all that it does.
       </a>
     </td>
     <td>
-      <a href="https://david-dm.org/honkjs/components">
-        <img src="https://david-dm.org/honkjs/components.svg?style=flat-square" alt="Dependency Status" />
+      <a href="https://david-dm.org/honkjs/honk?path=components">
+        <img src="https://david-dm.org/honkjs/honk.svg?path=components&style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/honk?path=components&type=dev">
+        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=components&style=flat-square" alt="Dependency Status" />
       </a>
     </td>
   </tr>
@@ -74,8 +85,13 @@ Honk, because, by default, that is all that it does.
       </a>
     </td>
     <td>
-      <a href="https://david-dm.org/honkjs/injector">
-        <img src="https://david-dm.org/honkjs/injector.svg?style=flat-square" alt="Dependency Status" />
+      <a href="https://david-dm.org/honkjs/honk?path=components">
+        <img src="https://david-dm.org/honkjs/honk.svg?path=injector&style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/honk?path=injector&type=dev">
+        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=injector&style=flat-square" alt="Dependency Status" />
       </a>
     </td>
   </tr>
@@ -87,8 +103,13 @@ Honk, because, by default, that is all that it does.
       </a>
     </td>
     <td>
-      <a href="https://david-dm.org/honkjs/store">
-        <img src="https://david-dm.org/honkjs/store.svg?style=flat-square" alt="Dependency Status" />
+      <a href="https://david-dm.org/honkjs/honk?path=store">
+        <img src="https://david-dm.org/honkjs/honk.svg?path=store&style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/honk?path=store&type=dev">
+        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=store&style=flat-square" alt="Dependency Status" />
       </a>
     </td>
   </tr>
@@ -100,8 +121,13 @@ Honk, because, by default, that is all that it does.
       </a>
     </td>
     <td>
-      <a href="https://david-dm.org/honkjs/silence">
-        <img src="https://david-dm.org/honkjs/silence.svg?style=flat-square" alt="Dependency Status" />
+      <a href="https://david-dm.org/honkjs/honk?path=silence">
+        <img src="https://david-dm.org/honkjs/honk.svg?path=silence&style=flat-square" alt="Dependency Status" />
+      </a>
+    </td>
+    <td>
+      <a href="https://david-dm.org/honkjs/honk?path=silence&type=dev">
+        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=silence&style=flat-square" alt="Dependency Status" />
       </a>
     </td>
   </tr>
