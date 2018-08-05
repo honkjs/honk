@@ -2,8 +2,7 @@ import { IHonkMiddlewareCreator } from '@honkjs/honk';
 
 declare module '@honkjs/honk' {
   interface IHonk {
-    (services: any): void;
-    <T>(services: any): T;
+    <T>(action: (services: any) => T): T;
   }
 }
 
