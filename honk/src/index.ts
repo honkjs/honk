@@ -13,6 +13,7 @@ export interface IHonk {
  */
 export interface IHonkServices {
   honk: IHonk;
+  [key: string]: any;
 }
 
 /**
@@ -20,7 +21,7 @@ export interface IHonkServices {
  * Used to share information between middlewares.
  */
 export interface IHonkApp {
-  services: any;
+  services: IHonkServices;
   [key: string]: any;
 }
 

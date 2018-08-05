@@ -1,6 +1,6 @@
 {
   "name": "@honkjs/honk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Honk, because, by default, that is all that it does.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
