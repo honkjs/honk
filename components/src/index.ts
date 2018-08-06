@@ -2,34 +2,89 @@ import { IHonkMiddlewareCreator } from '@honkjs/honk';
 
 declare module '@honkjs/honk' {
   interface IHonk {
-    <P>(creator: IHonkComponentCreator<P>, props?: P): HTMLElement;
+    /**
+     * Gets a component from cache or creates it.
+     *
+     * @template P The type of component props
+     * @param {IHonkComponentCreator<P>} creator A function that creates the new component
+     * @param {P} props The props required to initialize the component.
+     * @returns {HTMLElement} The resulting html element after being rendered.
+     */
+    <P, C extends IComponent>(creator: IHonkComponentCreator<P, C>, props: P): HTMLElement;
   }
 }
 
+/**
+ * Describes a simple cache
+ */
 export interface IComponentCache {
   get: (id: string) => IComponent;
   set: (id: string, component: IComponent) => void;
   remove: (id: string) => void;
 }
 
+/**
+ * The required interface of the component.
+ * Note: unload will be overwritten to also handle unloading from cache.
+ */
 export interface IComponent {
   unload?: (el: HTMLElement) => void;
   render: (args: any) => HTMLElement;
 }
 
-export interface IComponentCreator<P> {
-  (services: any, id: string, props: P): IComponent;
+/**
+ * Describes a function that creates a component.
+ *
+ * @export
+ * @interface IComponentCreator
+ * @template P
+ */
+export interface IComponentCreator<P, C extends IComponent> {
+  /**
+   * A function that creates components.
+   *
+   * @template P Type of component props
+   * @param {any} services The honk services
+   * @param {string} id The prefixed id used to cache this component
+   * @param {P} props The initial props object
+   * @returns {IComponent}
+   */
+  (services: any, id: string, props: P): C;
 }
 
+/**
+ * A function that maps the component props to an ID string.
+ *
+ * @export
+ * @interface IMapComponentPropsToId
+ * @template P The type of props
+ */
 export interface IMapComponentPropsToId<P> {
   (props: P): string;
 }
 
-export interface IHonkComponentCreator<P> {
-  (cache: IComponentCache, services: any, props: P): HTMLElement;
+/**
+ * A function that can be used by honk to get or create the component.
+ *
+ * @export
+ * @interface IHonkComponentCreator
+ * @template P
+ */
+export interface IHonkComponentCreator<P, C extends IComponent> {
+  (cache: IComponentCache, services: any, props: P): C;
+
+  /**
+   * The name of this component.
+   */
   component: string;
 }
 
+/**
+ * Creates a simple component cache.
+ *
+ * @export
+ * @returns {IComponentCache}
+ */
 export function createCache(): IComponentCache {
   const cache: any = {};
 
@@ -51,25 +106,42 @@ export function createCache(): IComponentCache {
   };
 }
 
-// can pull the id from props
-export function createHonkComponent<P extends { id: string }>(
+/**
+ * Creates a {IHonkComponentCreator} used to initialize a component.
+ *
+ * @export
+ * @template P The prop type for this component.  Must include an 'id: string' field.
+ * @param {string} name The name of this component.  Will be prefixed to IDs when caching.
+ * @param {IComponentCreator<P>} creator The creator function to generate the component.
+ * @returns {IHonkComponentCreator<P>}
+ */
+export function createHonkComponent<P extends { id: string }, C extends IComponent>(
   name: string,
-  creator: IComponentCreator<P>
-): IHonkComponentCreator<P>;
+  creator: IComponentCreator<P, C>
+): IHonkComponentCreator<P, C>;
 
-// has to pull from the creator function
-export function createHonkComponent<P>(
+/**
+ * Creates a {IHonkComponentCreator} used to initialize a component.
+ *
+ * @export
+ * @template P The prop type for this component.
+ * @param {string} name The name of this component.  Will be prefixed to IDs when caching.
+ * @param {IComponentCreator<P>} creator The creator function to generate the component.
+ * @param {IMapComponentPropsToId<P>} mapPropsToId A function to map the props to a string Id
+ * @returns {IHonkComponentCreator<P>}
+ */
+export function createHonkComponent<P, C extends IComponent>(
   name: string,
-  creator: IComponentCreator<P>,
+  creator: IComponentCreator<P, C>,
   mapPropsToId: IMapComponentPropsToId<P>
-): IHonkComponentCreator<P>;
+): IHonkComponentCreator<P, C>;
 
-export function createHonkComponent<P>(
+export function createHonkComponent<P, C extends IComponent>(
   name: string,
-  creator: IComponentCreator<P>,
+  creator: IComponentCreator<P, C>,
   mapPropsToId: IMapComponentPropsToId<P> = getDefaultId
-): IHonkComponentCreator<P> {
-  const honkCompCreator = <IHonkComponentCreator<P>>function(cache: IComponentCache, services: any, props: P) {
+): IHonkComponentCreator<P, C> {
+  const honkCompCreator = <IHonkComponentCreator<P, C>>function(cache: IComponentCache, services: any, props: P) {
     const id = mapPropsToId(props);
 
     if (!id) {
@@ -92,11 +164,11 @@ export function createHonkComponent<P>(
       };
       cache.set(uid, comp);
     }
-    return comp.render(props);
+    return comp;
   };
 
   // add a property flag to the creator function
-  // this allows it to be more accurately id'd by the middleare
+  // this allows it to be more accurately identified by the middleare
   honkCompCreator.component = name;
 
   return honkCompCreator;
@@ -106,12 +178,20 @@ function getDefaultId(props: any) {
   return props.id;
 }
 
+/**
+ * Creates a component caching middleware to be used with honk.
+ *
+ * @export
+ * @param {IComponentCache} [cache=createCache()] Optional cache to be used by the middleware.
+ * @returns {IHonkMiddlewareCreator}
+ */
 export default function createMiddleware(cache: IComponentCache = createCache()): IHonkMiddlewareCreator {
   return (app, next) => {
     return (args) => {
-      if (args.length === 2 && typeof args[0] === 'function' && args[0].component && typeof args[1] === 'object') {
-        const creator: IHonkComponentCreator<any> = args[0];
-        return creator(cache, app.services, args[1]);
+      if (args.length === 2 && typeof args[0] === 'function' && args[0].component) {
+        const creator: IHonkComponentCreator<any, IComponent> = args[0];
+        const props = args[1];
+        return creator(cache, app.services, props).render(props);
       }
       return next(args);
     };

@@ -1,6 +1,6 @@
 import 'jest';
 import Honk from '@honkjs/honk';
-import components, { IComponent, createCache, IComponentCache, createHonkComponent } from '../src';
+import components, { IComponent, createCache, createHonkComponent } from '../src';
 
 test('still honks', () => {
   console.log = jest.fn();
@@ -59,7 +59,7 @@ test('creates component with mapped id', () => {
 
   const props = { data: 'data', itemId: 'itemId' };
 
-  const map = (props) => props.itemId;
+  const map = (props: any) => props.itemId;
 
   const comp = {
     render: jest.fn((props) => {
