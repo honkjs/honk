@@ -12,7 +12,9 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest"
+    "test": "jest",
+    "version": "tsc",
+    "release": "np"
   },
   "repository": {
     "type": "git",
