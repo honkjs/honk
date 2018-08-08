@@ -1,23 +1,94 @@
-<h1 align="center">Honk</h1>
-
 <div align="center">
   <!-- stability -->
   <a href="https://nodejs.org/api/documentation.html#documentation_stability_index">
     <img src="https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square" alt="API Stability" />
   </a>
+  <!--  dependencies -->
+  <a href="https://david-dm.org/honkjs/honk">
+    <img src="https://david-dm.org/honkjs/honk.svg?style=flat-square" alt="dependency status" />
+  </a>
+  <!-- dev dependencies  -->
+  <a href="https://david-dm.org/honkjs/honk&type=dev">
+    <img src="https://david-dm.org/honkjs/honk/dev-status.svg?style=flat-square" alt="dev dependency status" />
+  </a>
   <!-- coverage -->
   <a href="https://codecov.io/github/honkjs/honk">
-    <img src="https://img.shields.io/codecov/c/github/honkjs/honk/master.svg?style=flat-square" alt="Test Coverage" />
+    <img src="https://img.shields.io/codecov/c/github/honkjs/honk/master.svg?style=flat-square" alt="test coverage" />
   </a>
   <!-- build -->
   <a href="https://travis-ci.org/honkjs/honk">
-    <img src="https://img.shields.io/travis/choojs/choo/master.svg?style=flat-square" alt="Build Status" />
+    <img src="https://img.shields.io/travis/honkjs/honk/master.svg?style=flat-square" alt="build status" />
   </a>
 </div>
+
+<h1 align="center">Honk</h1>
 
 Honk, pronounced "HONK 🚚 HONK" shouted as loudly as possible while making a truck horn pulling motion, is inspired by, and a loud collection of addons for, [choo](https://github.com/choojs/choo) 🚂🚋, the sturdy frontend framework that could.
 
 Honk, because, by default, that is all that it does.
+
+<table>
+  <tr>
+    <th>Package</th>
+    <th>Version</th>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/honkjs/honk">@honkjs/honk</a>
+    </td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/honk">
+        <img src="https://img.shields.io/npm/v/@honkjs/honk.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/honkjs/components">@honkjs/components</a>
+    </td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/components">
+        <img src="https://img.shields.io/npm/v/@honkjs/components.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/honkjs/forms">@honkjs/forms</a>
+    </td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/forms">
+        <img src="https://img.shields.io/npm/v/@honkjs/forms.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/honkjs/injector">@honkjs/injector</a></td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/injector">
+        <img src="https://img.shields.io/npm/v/@honkjs/injector.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/honkjs/store">@honkjs/store</a></td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/store">
+        <img src="https://img.shields.io/npm/v/@honkjs/store.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/honkjs/silence">@honkjs/silence</a>
+    </td>
+    <td>
+      <a href="https://www.npmjs.com/package/@honkjs/silence">
+        <img src="https://img.shields.io/npm/v/@honkjs/silence.svg?style=flat-square" alt="npm version" />
+      </a>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -31,107 +102,6 @@ Honk, because, by default, that is all that it does.
 </div>
 
 ---
-
-# Packages
-
-<table>
-  <tr>
-    <th>Package</th>
-    <th>Version</th>
-    <th>Dependencies</th>
-    <th>Dev Dependencies</th>
-  </tr>
-  <tr>
-    <td>@honkjs/honk</td>
-    <td>
-      <a href="https://www.npmjs.com/package/@honkjs/honk">
-        <img src="https://img.shields.io/npm/v/@honkjs/honk.svg?style=flat-square" alt="npm version" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk">
-        <img src="https://david-dm.org/honkjs/honk.svg?path=honk&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=silence&type=dev">
-        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=silence&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>@honkjs/components</td>
-    <td>
-      <a href="https://www.npmjs.com/package/@honkjs/components">
-        <img src="https://img.shields.io/npm/v/@honkjs/components.svg?style=flat-square" alt="npm version" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=components">
-        <img src="https://david-dm.org/honkjs/honk.svg?path=components&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=components&type=dev">
-        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=components&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>@honkjs/injector</td>
-    <td>
-      <a href="https://www.npmjs.com/package/@honkjs/injector">
-        <img src="https://img.shields.io/npm/v/@honkjs/injector.svg?style=flat-square" alt="npm version" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=components">
-        <img src="https://david-dm.org/honkjs/honk.svg?path=injector&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=injector&type=dev">
-        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=injector&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>@honkjs/store</td>
-    <td>
-      <a href="https://www.npmjs.com/package/@honkjs/store">
-        <img src="https://img.shields.io/npm/v/@honkjs/store.svg?style=flat-square" alt="npm version" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=store">
-        <img src="https://david-dm.org/honkjs/honk.svg?path=store&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=store&type=dev">
-        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=store&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>@honkjs/silence</td>
-    <td>
-      <a href="https://www.npmjs.com/package/@honkjs/silence">
-        <img src="https://img.shields.io/npm/v/@honkjs/silence.svg?style=flat-square" alt="npm version" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=silence">
-        <img src="https://david-dm.org/honkjs/honk.svg?path=silence&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-    <td>
-      <a href="https://david-dm.org/honkjs/honk?path=silence&type=dev">
-        <img src="https://david-dm.org/honkjs/honk/dev-status.svg?path=silence&style=flat-square" alt="Dependency Status" />
-      </a>
-    </td>
-  </tr>
-</table>
 
 # Getting started
 
@@ -147,7 +117,7 @@ const honk = new Honk().honk;
 honk(); // output: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](honk/)
+[Would you like to know more?](honk.md)
 
 # With service injection
 
@@ -168,7 +138,7 @@ function delayedHonk(delay: number) {
 honk(delayedHonk(1000)); // output after 1000ms: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](injector/)
+[Would you like to know more?](https://github.com/honkjs/injector)
 
 # With components
 
@@ -211,7 +181,7 @@ const honker = html`<div>Honk: ${honk(button, { id: 'honk', onHonk: () => honk()
 //  *CLICK*  output: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](components/)
+[Would you like to know more?](https://github.com/honkjs/components)
 
 # With store
 
@@ -247,7 +217,7 @@ store.setState((state) => ({ honks: 1000 });
 // output: nothing
 ```
 
-[Would you like to know more?](store/)
+[Would you like to know more?](https://github.com/honkjs/store)
 
 # With custom services
 
@@ -272,7 +242,7 @@ function honkOne({ anotherHonk }) {
 honk(honkOne); // output after 100ms: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](honk/)
+[Would you like to know more?](honk.md)
 
 # With custom middleware
 
@@ -304,7 +274,7 @@ const loud = honk.honk({ type: 'loud' }); // output: nothing.
 // loud = "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](honk/)
+[Would you like to know more?](honk.md)
 
 # With silence
 
@@ -317,7 +287,7 @@ const honk = new Honk().use(silence()).honk;
 honk(); // output: Nothing. Just the silence of your cold, dead heart.
 ```
 
-[Would you like to know more?](silence/)
+[Would you like to know more?](https://github.com/honkjs/silence)
 
 # FAQ
 
