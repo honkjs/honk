@@ -1,13 +1,5 @@
 language: node_js
-node_js: "node"
-env:
-  - PROJECT=honk
-  - PROJECT=injector
-  - PROJECT=components
-  - PROJECT=store
-  - PROJECT=silence
-before_install:
-  - cd $PROJECT
+node_js: 'node'
 install:
   - npm ci
   - npm install -g codecov
@@ -15,4 +7,3 @@ script:
   - npm run test
   - npm run build
   - codecov
-
