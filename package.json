@@ -7,7 +7,8 @@
   "files": [
     "dist",
     "src",
-    "tests"
+    "tests",
+    "honk.md"
   ],
   "scripts": {
     "build": "tsc",
