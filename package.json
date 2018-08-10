@@ -8,7 +8,7 @@
     "dist",
     "src",
     "tests",
-    "honk.md"
+    "HONK_HONK.md"
   ],
   "scripts": {
     "build": "tsc",
