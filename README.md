@@ -25,7 +25,7 @@
 
 Honk, pronounced "HONK 🚚 HONK" shouted as loudly as possible while making a truck horn pulling motion, is inspired by, and a loud collection of addons for, [choo](https://github.com/choojs/choo) 🚂🚋, the sturdy frontend framework that could.
 
-Honk, because, by default, that is all that it does.
+"Honk", because, by default, that is all that it does.
 
 <table>
   <tr>
@@ -39,26 +39,6 @@ Honk, because, by default, that is all that it does.
     <td>
       <a href="https://www.npmjs.com/package/@honkjs/honk">
         <img src="https://img.shields.io/npm/v/@honkjs/honk.svg?style=flat-square" alt="npm version" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://github.com/honkjs/components">@honkjs/components</a>
-    </td>
-    <td>
-      <a href="https://www.npmjs.com/package/@honkjs/components">
-        <img src="https://img.shields.io/npm/v/@honkjs/components.svg?style=flat-square" alt="npm version" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="https://github.com/honkjs/forms">@honkjs/forms</a>
-    </td>
-    <td>
-      <a href="https://www.npmjs.com/package/@honkjs/forms">
-        <img src="https://img.shields.io/npm/v/@honkjs/forms.svg?style=flat-square" alt="npm version" />
       </a>
     </td>
   </tr>
@@ -139,85 +119,6 @@ honk(delayedHonk(1000)); // output after 1000ms: "HONK 🚚 HONK"
 ```
 
 [Would you like to know more?](https://github.com/honkjs/injector)
-
-# With components
-
-```ts
-import Honk, { IHonk, IHonkServices } from '@honkjs/honk';
-import components from '@honkjs/components';
-import html from 'nanohtml';
-import Component from 'nanocomponent';
-
-const honk = new Honk().use(components()).honk;
-
-honk(); // output: "HONK 🚚 HONK"
-
-type HonkProps = { id: string; onHonk: () => void };
-
-class HonkButton extends Component {
-  private props: HonkProps;
-
-  constructor(private honk: IHonk, id: string) {
-    super(id);
-  }
-
-  createElement(props: HonkProps) {
-    this.props = props;
-    return html`<button onclick=${this.onclick}>Honk</honk>`;
-  }
-
-  onclick = () => this.props.onHonk();
-
-  update() {
-    return false;
-  }
-}
-
-const button = createHonkComponent('HonkButton', ({ honk }: IHonkServices, id: string) => {
-  return new HonkButton(honk, id);
-});
-
-const honker = html`<div>Honk: ${honk(button, { id: 'honk', onHonk: () => honk() })}</div>`;
-//  *CLICK*  output: "HONK 🚚 HONK"
-```
-
-[Would you like to know more?](https://github.com/honkjs/components)
-
-# With store
-
-```ts
-import Honk from '@honkjs/honk';
-import { createStore } from '@honkjs/store';
-
-const honk = new Honk().honk;
-
-honk(); // output: "HONK 🚚 HONK"
-
-const initState = {
-  honks: 0,
-};
-
-const store = createStore(initState);
-
-const unsubscribe = store.subscribe((state) => {
-  for (let x = 0; x < state.honks; x++) {
-    honk();
-  }
-});
-
-store.setState((state) => ({ honks: 1 });
-// output: "HONK 🚚 HONK"
-
-store.setState((state) => ({ honks: 2 });
-// output: "HONK 🚚 HONK", "HONK 🚚 HONK"
-
-unsubscribe();
-
-store.setState((state) => ({ honks: 1000 });
-// output: nothing
-```
-
-[Would you like to know more?](https://github.com/honkjs/store)
 
 # With custom services
 
