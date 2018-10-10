@@ -97,7 +97,7 @@ const honk = new Honk().honk;
 honk(); // output: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](honk.md)
+[Would you like to know more?](HONK_HONK.md)
 
 # With service injection
 
@@ -143,7 +143,7 @@ function honkOne({ anotherHonk }) {
 honk(honkOne); // output after 100ms: "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](honk.md)
+[Would you like to know more?](HONK_HONK.md)
 
 # With custom middleware
 
@@ -175,7 +175,7 @@ const loud = honk.honk({ type: 'loud' }); // output: nothing.
 // loud = "HONK 🚚 HONK"
 ```
 
-[Would you like to know more?](honk.md)
+[Would you like to know more?](HONK_HONK.md)
 
 # With silence
 
