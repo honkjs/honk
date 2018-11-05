@@ -99,7 +99,7 @@ honk(); // output: "HONK 🚚 HONK"
 
 [Would you like to know more?](HONK_HONK.md)
 
-# With service injection
+# With service injection (thunks)
 
 ```ts
 import Honk from '@honkjs/honk';
@@ -132,7 +132,9 @@ function moreHonkMiddleware(app, next) {
   }
 }
 
-const honk = new Honk().use(injector).use(moreHonkMiddleware).honk;
+const honk = new Honk()
+  .use(injector())
+  .use(moreHonkMiddleware).honk;
 
 honk(); // output: "HONK 🚚 HONK"
 
