@@ -1,8 +1,5 @@
 <div align="center">
-  <!-- stability -->
-  <a href="https://nodejs.org/api/documentation.html#documentation_stability_index">
-    <img src="https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square" alt="API Stability" />
-  </a>
+
   <!--  dependencies -->
   <a href="https://david-dm.org/honkjs/honk">
     <img src="https://david-dm.org/honkjs/honk.svg?style=flat-square" alt="dependency status" />
@@ -10,6 +7,10 @@
   <!-- dev dependencies  -->
   <a href="https://david-dm.org/honkjs/honk&type=dev">
     <img src="https://david-dm.org/honkjs/honk/dev-status.svg?style=flat-square" alt="dev dependency status" />
+  </a>
+  <!-- greenkeeper -->
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/honkjs/honk.svg" alt="greenkeeper status" />
   </a>
   <!-- coverage -->
   <a href="https://codecov.io/github/honkjs/honk">
@@ -71,8 +72,6 @@ Honk, pronounced "HONK 🚚 HONK" shouted as loudly as possible while making a t
 </table>
 
 ---
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/honkjs/honk.svg)](https://greenkeeper.io/)
 
 <div align="center">
   <sub>Built with 🤣 by

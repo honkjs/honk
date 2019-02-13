@@ -135,7 +135,7 @@ honk(doSomething);
 
 ## Reducer
 
-Let's build [redux](https://redux.js.org/) with the help of [@honkjs/store](../store).
+Let's build [redux](https://redux.js.org/) with the help of [@honkjs/store](https://github.com/honkjs/store).
 
 ```ts
 import Honk from '@honkjs/honk';
@@ -235,4 +235,4 @@ function dispatchMeWithParam(name) {
 honk(dispatchMeWithParam('bob')).then((results) => console.log(results));
 ```
 
-This functionality is available pre-built as [@honkjs/injector](../injector).
+This functionality is available pre-built as [@honkjs/injector](https://github.com/honkjs/injector).
