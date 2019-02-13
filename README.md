@@ -72,6 +72,8 @@ Honk, pronounced "HONK 🚚 HONK" shouted as loudly as possible while making a t
 
 ---
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/honkjs/honk.svg)](https://greenkeeper.io/)
+
 <div align="center">
   <sub>Built with 🤣 by
     <a href="https://github.com/decoy">Kellen Piffner</a> and
