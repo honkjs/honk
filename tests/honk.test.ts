@@ -29,15 +29,12 @@ test('passes app services to middlewares', () => {
   const honk = new Honk()
     .use((app, next) => {
       expect(typeof app).toBe('object');
-      expect(typeof app.services).toBe('object');
-      expect(typeof app.services.honk).toBe('function');
+      // check honk is available
       app.custom = 'custom';
-      app.services.test = 'test';
       return next;
     })
     .use((app, next) => {
       expect(app.custom).toBe('custom');
-      expect(app.services.test).toBe('test');
       return next;
     }).honk as any;
 
