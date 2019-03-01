@@ -75,7 +75,7 @@ Honk, pronounced "HONK 🚚 HONK" shouted as loudly as possible while making a t
 
 <div align="center">
   <sub>Built with 🤣 by
-    <a href="https://github.com/decoy">Kellen Piffner</a> and
+    <a href="https://github.com/decoy">Kel</a> and
     <a href="https://github.com/honkjs/honk/graphs/contributors">
       contributors
     </a>
@@ -127,20 +127,14 @@ honk(delayedHonk(1000)); // output after 1000ms: "HONK 🚚 HONK"
 import Honk from '@honkjs/honk';
 import injector from '@honkjs/injector';
 
-function moreHonkMiddleware(app, next) {
-    app.services.anotherHonk = app.services.honk;
-    return next;
-  }
-}
-
 const honk = new Honk()
-  .use(injector())
-  .use(moreHonkMiddleware).honk;
+  .use(injector({ time: 100 }))
+  .honk;
 
 honk(); // output: "HONK 🚚 HONK"
 
-function honkOne({ anotherHonk }) {
-  setTimeout(() => anotherHonk(), 100);
+function honkOne({ honk, time }) {
+  setTimeout(() => honk(), time);
 }
 
 honk(honkOne); // output after 100ms: "HONK 🚚 HONK"
