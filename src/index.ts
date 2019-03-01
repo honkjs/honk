@@ -9,19 +9,11 @@ export interface IHonk {
 }
 
 /**
- * The default services shared by honk.
- */
-export interface IHonkServices {
-  honk: IHonk;
-  [key: string]: any;
-}
-
-/**
  * The shared honk application context.
  * Used to share information between middlewares.
  */
-export interface IHonkApp {
-  services: IHonkServices;
+export interface IHonkContext {
+  honk: IHonk;
   [key: string]: any;
 }
 
@@ -39,17 +31,17 @@ export interface IHonkMiddleware {
 }
 
 /**
- * A middleware function.
+ * A middleware creator function.
  */
 export interface IHonkMiddlewareCreator {
   /**
    * A function that adds functionality to honk.
    *
-   * @param {IHonkApp} app The application context.
+   * @param {IHonkContext} app The shared honk context.
    * @param {IHonkMiddleware} next The next middleware in the chain.
    * @returns {IHonkMiddleware} The new base middleware function.
    */
-  (app: IHonkApp, next: IHonkMiddleware): IHonkMiddleware;
+  (app: IHonkContext, next: IHonkMiddleware): IHonkMiddleware;
 }
 
 /**
@@ -58,7 +50,7 @@ export interface IHonkMiddlewareCreator {
 export default class Honk {
   private next: IHonkMiddleware;
 
-  private app: IHonkApp;
+  private app: IHonkContext;
 
   /**
    * The honk function that can be called to send arguments through the middlewares.
@@ -73,18 +65,15 @@ export default class Honk {
    * @memberof Honk
    */
   constructor() {
-    this.next = () => console.log('HONK 🚚 HONK');
+    this.next = () => console.log('HONK 🚚 HONK'); // because by default that's all that it does.
 
     const self = this;
+
     this.honk = function() {
       return self.next(arguments);
     };
 
-    this.app = {
-      services: {
-        honk: this.honk,
-      },
-    };
+    this.app = { honk: self.honk };
   }
 
   /**
