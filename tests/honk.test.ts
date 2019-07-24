@@ -7,7 +7,7 @@ test('honks', () => {
   const honk = new Honk().honk;
 
   expect(honk()).toBeUndefined();
-  expect(console.log).toBeCalledWith('HONK 🚚 HONK');
+  expect(console.log).toBeCalledWith('🚚 HONK!');
 });
 
 test('passes arguments to middleware', () => {
@@ -39,7 +39,7 @@ test('passes app services to middlewares', () => {
     }).honk as any;
 
   expect(honk()).toBeUndefined();
-  expect(console.log).toBeCalledWith('HONK 🚚 HONK');
+  expect(console.log).toBeCalledWith('🚚 HONK!');
 });
 
 test('returns value from middleware', () => {
@@ -77,5 +77,5 @@ test('uses multiple middlewares', () => {
   expect(console.log).not.toBeCalled();
 
   expect(honk()).toBeUndefined();
-  expect(console.log).toBeCalledWith('HONK 🚚 HONK');
+  expect(console.log).toBeCalledWith('🚚 HONK!');
 });
