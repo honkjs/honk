@@ -15,7 +15,7 @@ import Honk from '@honkjs/honk';
 
 const honk = new Honk().honk;
 
-honk(); // output: "HONK 🚚 HONK"
+honk(); // output: "🚚 HONK!"
 ```
 
 A middleware wraps the previous functionality of honk in another function.
@@ -32,7 +32,7 @@ const honk = new Honk().use(function(app, next) {
   // 'next' is the previous middleware function.
   // since we haven't added any middlewares before this one,
   // right now it's the base honk();
-  // next(); // output: "HONK 🚚 HONK"
+  // next(); // output: "🚚 HONK!"
 
   return function(args) {
     // the middleware creator returns a function that takes the argument array passed into honk.
