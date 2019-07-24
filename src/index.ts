@@ -3,7 +3,7 @@
  */
 export interface IHonk {
   /**
-   * 'HONK 🚚 HONK'
+   * '🚚 HONK!'
    */
   (): void;
 }
@@ -65,7 +65,7 @@ export default class Honk {
    * @memberof Honk
    */
   constructor() {
-    this.next = () => console.log('HONK 🚚 HONK'); // because by default that's all that it does.
+    this.next = () => console.log('🚚 HONK!'); // because by default that's all that it does.
 
     const self = this;
 

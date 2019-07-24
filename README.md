@@ -24,7 +24,7 @@
 
 <h1 align="center">Honk</h1>
 
-Honk, pronounced "HONK 🚚 HONK" shouted as loudly as possible while making a truck horn pulling motion, is inspired by, and a loud collection of addons for, [choo](https://github.com/choojs/choo) 🚂🚋, the sturdy frontend framework that could.
+Honk, pronounced "🚚 HONK!" shouted as loudly as possible while making a truck horn pulling motion, is inspired by, and a loud collection of addons for, [choo](https://github.com/choojs/choo) 🚂🚋, the sturdy frontend framework that could.
 
 "Honk", because, by default, that is all that it does.
 
@@ -95,7 +95,7 @@ import Honk from '@honkjs/honk';
 
 const honk = new Honk().honk;
 
-honk(); // output: "HONK 🚚 HONK"
+honk(); // output: "🚚 HONK!"
 ```
 
 [Would you like to know more?](HONK_HONK.md)
@@ -108,7 +108,7 @@ import injector from '@honkjs/injector';
 
 const honk = new Honk().use(injector()).honk;
 
-honk(); // output: "HONK 🚚 HONK"
+honk(); // output: "🚚 HONK!"
 
 function delayedHonk(delay: number) {
   return function({ honk }: IHonkServices) {
@@ -116,7 +116,7 @@ function delayedHonk(delay: number) {
   };
 }
 
-honk(delayedHonk(1000)); // output after 1000ms: "HONK 🚚 HONK"
+honk(delayedHonk(1000)); // output after 1000ms: "🚚 HONK!"
 ```
 
 [Would you like to know more?](https://github.com/honkjs/injector)
@@ -131,13 +131,13 @@ const honk = new Honk()
   .use(injector({ time: 100 }))
   .honk;
 
-honk(); // output: "HONK 🚚 HONK"
+honk(); // output: "🚚 HONK!"
 
 function honkOne({ honk, time }) {
   setTimeout(() => honk(), time);
 }
 
-honk(honkOne); // output after 100ms: "HONK 🚚 HONK"
+honk(honkOne); // output after 100ms: "🚚 HONK!"
 ```
 
 [Would you like to know more?](HONK_HONK.md)
@@ -152,9 +152,9 @@ function honkingMiddleware(app, next) {
     if (args.length === 1 && args[0].type) {
       const honkType = args[0].type;
       if (honkType === 'quiet') {
-        return 'honk 🚚 honk';
+        return '🚚 HONK!';
       } else {
-        return 'HONK 🚚 HONK';
+        return '🚚 HONK!';
       }
     }
     return next(args);
@@ -163,13 +163,13 @@ function honkingMiddleware(app, next) {
 
 const honk = new Honk().use(honkingMiddleware).honk;
 
-honk(); // output: "HONK 🚚 HONK"
+honk(); // output: "🚚 HONK!"
 
 const quiet = honk.honk({ type: 'quiet' }); // output: nothing.
-// quiet = "honk 🚚 honk"
+// quiet = "🚚 HONK!"
 
 const loud = honk.honk({ type: 'loud' }); // output: nothing.
-// loud = "HONK 🚚 HONK"
+// loud = "🚚 HONK!"
 ```
 
 [Would you like to know more?](HONK_HONK.md)
@@ -191,4 +191,4 @@ honk(); // output: Nothing. Just the silence of your cold, dead heart.
 
 ### Honk?
 
-HONK 🚚 HONK
+🚚 HONK!
