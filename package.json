@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/honkjs/honk",
   "devDependencies": {
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^25.2.2",
     "jest": "^25.4.0",
     "np": "^6.2.3",
     "ts-jest": "^25.4.0",
